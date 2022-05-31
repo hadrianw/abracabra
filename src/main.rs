@@ -473,6 +473,7 @@ fn main() {
     loop {
         if let Err(err) = rewriter.write(&buf[..size]) {
             println!("error: {:?}", err);
+            println!("it took: {:?}", timer.elapsed());
             break;
         }
         if size < buf.len() {
