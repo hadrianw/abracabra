@@ -7,7 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-adblock = "0.5.4"
+adblock = "0.5.5"
 chardetng = "0.1.17"
 selectors = "0.22.0"
 cssparser = "0.27.2"
