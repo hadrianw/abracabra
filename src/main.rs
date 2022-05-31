@@ -247,6 +247,23 @@ fn main() {
             };
             Ok(())
         }),
+        element!("link[href][rel='preload'][as='script']", |el| {
+            let url = el.get_attribute("href").unwrap();
+            if let Some(parsed_url) = url_parser::parse_url(&url) {
+                let result = blocker.check(&Request::from_urls_with_hostname(
+                    url.as_str(),
+                    parsed_url.hostname(),
+                    source_hostname,
+                    "script",
+                    None,
+                ));
+                if result.matched {
+                    println!("preload-script {}", url);
+                    return Err(AdMatchError.into());
+                }
+            };
+            Ok(())
+        }),
         element!("script[src]", |el| {
             let url = el.get_attribute("src").unwrap();
             if let Some(parsed_url) = url_parser::parse_url(&url) {
