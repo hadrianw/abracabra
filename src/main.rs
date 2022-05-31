@@ -208,6 +208,11 @@ fn main() {
     // TODO: it has to be a vec of hashes
     let source_hash = adblock::utils::fast_hash(&source_hostname);
 
+    if blocked_domains.contains(&source_hash) {
+        println!("blocked domain");
+        return;
+    }
+
     let mut buf = [0u8; 8192];
     let mut file = File::open("rock.html").unwrap();
     let mut size = file.read(&mut buf).unwrap();
